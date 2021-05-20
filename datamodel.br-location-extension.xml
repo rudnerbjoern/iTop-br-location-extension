@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.5">
+    <!--
+    * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
+    -->
+    <classes>
+        <class id="Location" _delta="must_exist">
+            <fields>
+                <field id="type" xsi:type="AttributeEnum" _delta="define">
+                    <sql>type</sql>
+                    <is_null_allowed>true</is_null_allowed>
+                    <display_style>list</display_style>
+                    <values _delta="redefine">
+                        <value id="1">1</value>
+                        <value id="2">2</value>
+                        <value id="3">3</value>
+                        <value id="4">4</value>
+                        <value id="5">5</value>
+                    </values>
+                </field>
+                <field id="locationtype_id" xsi:type="AttributeExternalKey" _delta="force">
+                    <sql>locationtype_id</sql>
+                    <target_class>LocationType</target_class>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_MANUAL</on_target_delete>
+                </field>
+                <field id="parent_id" xsi:type="AttributeHierarchicalKey" _delta="define_if_not_exists">
+                    <sql>parent_id</sql>
+                    <filter>
+                        <![CDATA[SELECT Location WHERE (type < :this->type)]]>
+                    </filter>
+                    <is_null_allowed>true</is_null_allowed>
+                    <on_target_delete>DEL_AUTO</on_target_delete>
+                </field>
+                <field id="locations_list" xsi:type="AttributeLinkedSet" _delta="define_if_not_exists">
+                    <linked_class>Location</linked_class>
+                    <ext_key_to_me>parent_id</ext_key_to_me>
+                </field>
+            </fields>
+            <presentation>
+                <details>
+                    <items>
+                        <item id="locationtype_id" _delta="force">
+                            <rank>25</rank>
+                        </item>
+                        <item id="parent_id" _delta="define_if_not_exists">
+                            <rank>35</rank>
+                        </item>
+                        <item id="locations_list" _delta="define_if_not_exists">
+                            <rank>100</rank>
+                        </item>
+                    </items>
+                </details>
+                <default_search>
+                    <items>
+                        <item id="locationtype_id" _delta="force">
+                            <rank>40</rank>
+                        </item>
+                    </items>
+                </default_search>
+                <list>
+                    <items>
+                        <item id="locationtype_id" _delta="force">
+                            <rank>15</rank>
+                        </item>
+                        <item id="parent_id" _delta="define_if_not_exists">
+                            <rank>25</rank>
+                        </item>
+                    </items>
+                </list>
+            </presentation>
+        </class>
+    </classes>
+</itop_design>

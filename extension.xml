@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension format="1.0">
+    <extension_code>
+        <![CDATA[br-location-extension]]>
+    </extension_code>
+    <company>
+        <![CDATA[]]>
+    </company>
+    <author>
+        <![CDATA[Björn Rudner]]>
+    </author>
+    <label>
+        <![CDATA[Datamodel: Location - Additional fields]]>
+    </label>
+    <description>
+        <![CDATA[Adds additional fields to the iTop Location class.]]>
+    </description>
+    <version>
+        <![CDATA[0.1.0]]>
+    </version>
+    <release_date>
+        <![CDATA[2021-05-20]]>
+    </release_date>
+    <version_description>
+        <![CDATA[]]>
+    </version_description>
+    <itop_version_min>
+        <![CDATA[2.7.0]]>
+    </itop_version_min>
+    <status>stable</status>
+    <mandatory>false</mandatory>
+    <more_info_url>
+        <![CDATA[https://github.com/rudnerbjoern/iTop-br-location-extension/blob/main/README.md]]>
+    </more_info_url>
+</extension>
