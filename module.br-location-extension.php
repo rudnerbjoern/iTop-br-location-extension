@@ -19,7 +19,7 @@ SetupWebPage::AddModule(
         // Setup
         //
         'dependencies' => array(
-            'itop-portal/0.0.0',
+            'itop-config-mgmt/0.0.0',
         ),
         'mandatory' => false,
         'visible' => true,
