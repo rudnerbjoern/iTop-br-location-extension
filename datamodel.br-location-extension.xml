@@ -27,8 +27,12 @@
                 <field id="parent_id" xsi:type="AttributeHierarchicalKey" _delta="define_if_not_exists">
                     <sql>parent_id</sql>
                     <filter>
-                        <![CDATA[SELECT Location WHERE (type < :this->type)]]>
+                        <![CDATA[SELECT Location AS l WHERE (l.type < :this->type) AND l.org_id = :this->org_id]]>
                     </filter>
+                    <dependencies>
+                        <attribute id="org_id" />
+                        <attribute id="type" />
+                    </dependencies>
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_AUTO</on_target_delete>
                 </field>
