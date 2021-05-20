@@ -10,7 +10,7 @@
                     <sql>type</sql>
                     <is_null_allowed>true</is_null_allowed>
                     <display_style>list</display_style>
-                    <values _delta="redefine">
+                    <values>
                         <value id="1">1</value>
                         <value id="2">2</value>
                         <value id="3">3</value>
