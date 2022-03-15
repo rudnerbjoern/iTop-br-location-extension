@@ -135,6 +135,19 @@
 							}
 
                             $this->Set('nicename', $sNicename);
+
+                            // Cascade to clients
+							if (!(empty($this->Get('locations_list'))))
+							{
+                                $sOQL = "SELECT Location WHERE parent_id = :parent";
+                                $oClientSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('parent' => $this->Get('id'),));
+
+                                // Update all clients
+                                while ($oClient = $oClientSet->Fetch())
+                                {
+                                    $oClient->SetNicename;
+                                    $oClient->DBUpdate();
+                                }
 					    }]]>
                     </code>
                 </method>
@@ -142,9 +155,6 @@
             <presentation>
                 <details>
                     <items>
-                        <item id="nicename" _delta="force">
-                            <rank>24</rank>
-                        </item>
                         <item id="type" _delta="force">
                             <rank>25</rank>
                         </item>
