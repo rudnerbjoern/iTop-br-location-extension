@@ -6,6 +6,11 @@
     <classes>
         <class id="Location" _delta="must_exist">
             <fields>
+                <field id="nicename" xsi:type="AttributeString" _delta="define">
+                    <sql>nicename</sql>
+                    <default_value>unknown</default_value>
+                    <is_null_allowed>false</is_null_allowed>
+                </field>
                 <field id="type" xsi:type="AttributeEnum" _delta="define">
                     <sql>type</sql>
                     <is_null_allowed>true</is_null_allowed>
@@ -41,9 +46,97 @@
                     <ext_key_to_me>parent_id</ext_key_to_me>
                 </field>
             </fields>
+            <methods>
+                <method id="GetAttributeFlags" _delta="define">
+                    <static>false</static>
+                    <access>public</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[public function GetAttributeFlags($sAttCode, &$aReasons = array(), $sTargetState = '')
+					    {
+						    // Force the computed field to be read-only, preventing it to be written
+						    if (($sAttCode == 'nicename'))
+							    return(OPT_ATT_READONLY | parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState));
+						    return parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState);
+					    }]]>
+                    </code>
+                </method>
+                <method id="GetInitialStateAttributeFlags" _delta="define">
+                    <static>false</static>
+                    <access>public</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[public function GetInitialStateAttributeFlags($sAttCode, &$aReasons = array())
+					    {
+						    // Hide the calculated field in object creation form
+						    if (($sAttCode == 'nicename'))
+							    return(OPT_ATT_HIDDEN | parent::GetInitialStateAttributeFlags($sAttCode, $aReasons));
+						    return parent::GetInitialStateAttributeFlags($sAttCode, $aReasons);
+					    }]]>
+                    </code>
+                </method>
+                <method id="OnInsert" _delta="define">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[protected function OnInsert()
+					    {
+						    $this->SetNicename();
+                            parent::OnInsert();
+					    }]]>
+                    </code>
+                </method>
+                <method id="OnUpdate" _delta="define">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[protected function OnUpdate()
+					    {
+						    $this->SetNicename();
+                            parent::OnUpdate();
+					    }]]>
+                    </code>
+                </method>
+                <method id="SetNicename" _delta="define">
+                    <static>false</static>
+                    <access>protected</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[protected function SetNicename()
+					    {
+                            // read the new value of the Name
+                            $sName = $this->Get('name');
+
+                            // failsafe, the field cannot be empty
+                            $sNicename = $sName;
+
+                            // get Nicename from Parent
+                            $sParentNicename = 'error';
+
+                            if (!(empty($this->Get('parent_id'))))
+							{
+								// try to get the parent Location
+								$oParentLocation = MetaModel::GetObject('Location', $this->Get('parent_id'));
+								if (is_object($oParentLocation))
+								{
+                                    $sParentNicename = $oParentLocation->Get('nicename');
+								}
+							}
+
+                            $sNicename = $sParentNicename.'/'.$sName;
+                            $this->Set('nicename', $sNicename);
+					    }]]>
+                    </code>
+                </method>
+            </methods>
             <presentation>
                 <details>
                     <items>
+                        <item id="nicename" _delta="force">
+                            <rank>24</rank>
+                        </item>
                         <item id="type" _delta="force">
                             <rank>25</rank>
                         </item>
