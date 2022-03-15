@@ -6,6 +6,12 @@
     <classes>
         <class id="Location" _delta="must_exist">
             <fields>
+                <naming>
+                    <attributes>
+                        <attribute id="name" _delta="delete"/>
+                        <attribute id="nicename" _delta="force"/>
+                    </attributes>
+                </naming>
                 <field id="nicename" xsi:type="AttributeString" _delta="define">
                     <sql>nicename</sql>
                     <default_value>unknown</default_value>
@@ -113,7 +119,7 @@
                             $sNicename = $sName;
 
                             // get Nicename from Parent
-                            $sParentNicename = 'error';
+                            $sParentNicename = '';
 
                             if (!(empty($this->Get('parent_id'))))
 							{
@@ -122,10 +128,10 @@
 								if (is_object($oParentLocation))
 								{
                                     $sParentNicename = $oParentLocation->Get('nicename');
+                                    $sNicename = $sParentNicename.'/'.$sName;
 								}
 							}
 
-                            $sNicename = $sParentNicename.'/'.$sName;
                             $this->Set('nicename', $sNicename);
 					    }]]>
                     </code>
