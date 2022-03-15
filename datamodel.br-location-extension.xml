@@ -148,6 +148,7 @@
                                     $oClient->SetNicename();
                                     $oClient->DBUpdate();
                                 }
+                            }
 					    }]]>
                     </code>
                 </method>
