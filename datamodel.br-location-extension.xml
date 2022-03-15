@@ -145,7 +145,7 @@
                                 // Update all clients
                                 while ($oClient = $oClientSet->Fetch())
                                 {
-                                    $oClient->SetNicename;
+                                    $oClient->SetNicename();
                                     $oClient->DBUpdate();
                                 }
 					    }]]>
