@@ -5,13 +5,15 @@
     -->
     <classes>
         <class id="Location" _delta="must_exist">
-            <fields>
+            <properties>
                 <naming>
                     <attributes>
                         <attribute id="name" _delta="delete"/>
                         <attribute id="nicename" _delta="force"/>
                     </attributes>
                 </naming>
+            </properties>
+            <fields>
                 <field id="nicename" xsi:type="AttributeString" _delta="define">
                     <sql>nicename</sql>
                     <default_value>unknown</default_value>
