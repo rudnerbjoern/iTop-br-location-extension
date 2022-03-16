@@ -104,7 +104,7 @@
                         <![CDATA[public function OnUpdate()
 					    {
                             $aChanges = $this->ListChanges();
-                            if (array_key_exists('name', $aChanges))
+                            if (array_key_exists('name', $aChanges) || array_key_exists('parent_id', $aChanges))
                             {
                                 // record in the Location memory object that the name was changed
                                 $this->i_NameChanged = true;
