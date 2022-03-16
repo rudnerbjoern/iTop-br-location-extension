@@ -85,10 +85,10 @@
                 </method>
                 <method id="OnInsert" _delta="define">
                     <static>false</static>
-                    <access>protected</access>
+                    <access>public</access>
                     <type>Overload-DBObject</type>
                     <code>
-                        <![CDATA[protected function OnInsert()
+                        <![CDATA[public function OnInsert()
 					    {
 						    $this->SetNicename();
                             parent::OnInsert();
@@ -97,22 +97,45 @@
                 </method>
                 <method id="OnUpdate" _delta="define">
                     <static>false</static>
-                    <access>protected</access>
+                    <access>public</access>
                     <type>Overload-DBObject</type>
                     <code>
-                        <![CDATA[protected function OnUpdate()
+                        <![CDATA[public function OnUpdate()
 					    {
-						    $this->SetNicename();
+                            $aChanges = $this->ListChanges();
+                            if (array_key_exists('name', $aChanges))
+                            {
+                                // record in the Location memory object that the name was changed
+                                $this->i_NameChanged = true;
+                                $this->SetNicename();
+                            }
                             parent::OnUpdate();
+					    }]]>
+                    </code>
+                </method>
+                <method id="AfterUpdate" _delta="define">
+                    <static>false</static>
+                    <access>public</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[public function AfterUpdate()
+					    {
+                            // The Location is updated in DB and Name was changed,
+                            if (isset($this->i_NameChanged))
+                            {
+                                // we need to rename the childs
+                                $this->UpdateChilds();
+                            }
+                            parent::AfterUpdate();
 					    }]]>
                     </code>
                 </method>
                 <method id="SetNicename" _delta="define">
                     <static>false</static>
-                    <access>protected</access>
+                    <access>public</access>
                     <type>Overload-DBObject</type>
                     <code>
-                        <![CDATA[protected function SetNicename()
+                        <![CDATA[public function SetNicename()
 					    {
                             // read the new value of the Name
                             $sName = $this->Get('name');
@@ -135,18 +158,24 @@
 							}
 
                             $this->Set('nicename', $sNicename);
-
-                            // Cascade to clients
-							if (!(empty($this->Get('locations_list'))))
+					    }]]>
+                    </code>
+                </method>
+                <method id="UpdateChilds" _delta="define">
+                    <static>false</static>
+                    <access>public</access>
+                    <type>Overload-DBObject</type>
+                    <code>
+                        <![CDATA[public function UpdateChilds()
+					    {
+                            if (!(empty($this->Get('locations_list'))))
 							{
-                                $sOQL = "SELECT Location WHERE parent_id = :parent";
-                                $oClientSet = new DBObjectSet(DBObjectSearch::FromOQL($sOQL), array(), array('parent' => $this->Get('id'),));
-
-                                // Update all clients
-                                while ($oClient = $oClientSet->Fetch())
+                                // Cascade to Child Locations
+                                $oChildSet = $this->Get('locations_list');
+                                while($oChild = $oChildSet->Fetch())
                                 {
-                                    $oClient->SetNicename();
-                                    $oClient->DBUpdate();
+                                    $oChild->SetNicename();
+                                    $oChild->DBUpdate();
                                 }
                             }
 					    }]]>
