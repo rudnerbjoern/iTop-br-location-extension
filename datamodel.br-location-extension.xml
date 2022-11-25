@@ -2,15 +2,15 @@
 <itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.7">
     <!--
     * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
-    * @version     2022-03-16
+    * @version     2022-11-25
     -->
     <classes>
         <class id="Location" _delta="must_exist">
             <properties>
                 <naming>
                     <attributes>
-                        <attribute id="name" _delta="delete"/>
-                        <attribute id="nicename" _delta="force"/>
+                        <attribute id="name" _delta="delete" />
+                        <attribute id="nicename" _delta="force" />
                     </attributes>
                 </naming>
             </properties>
@@ -53,6 +53,11 @@
                 <field id="locations_list" xsi:type="AttributeLinkedSet" _delta="define_if_not_exists">
                     <linked_class>Location</linked_class>
                     <ext_key_to_me>parent_id</ext_key_to_me>
+                </field>
+                <field id="description" xsi:type="AttributeText" _delta="define">
+                    <sql>description</sql>
+                    <default_value />
+                    <is_null_allowed>true</is_null_allowed>
                 </field>
             </fields>
             <methods>
@@ -192,6 +197,9 @@
                         <item id="parent_id" _delta="define_if_not_exists">
                             <rank>35</rank>
                         </item>
+                        <item id="description" _delta="define_if_not_exists">
+                            <rank>75</rank>
+                        </item>
                         <item id="locations_list" _delta="define_if_not_exists">
                             <rank>100</rank>
                         </item>
@@ -211,6 +219,9 @@
                         </item>
                         <item id="parent_id" _delta="define_if_not_exists">
                             <rank>25</rank>
+                        </item>
+                        <item id="description" _delta="define_if_not_exists">
+                            <rank>75</rank>
                         </item>
                     </items>
                 </list>

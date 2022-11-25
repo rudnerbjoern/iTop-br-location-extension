@@ -2,14 +2,14 @@
 
 /**
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2022-03-16
+ * @version     2022-11-25
  *
  * iTop module definition file
  */
 
 SetupWebPage::AddModule(
     __FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-    'br-location-extension/0.3.0',
+    'br-location-extension/0.4.0',
     array(
         // Identification
         //

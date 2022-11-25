@@ -2,7 +2,7 @@
 
 /**
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2022-03-16
+ * @version     2022-11-25
  *
  * Localized data
  */
@@ -15,6 +15,8 @@ Dict::Add('EN US', 'English', 'English', array(
     'Class:Location/Attribute:parent_id+' => 'Location hosting this one (eg. For a \'room\', should be a \'floor\' or a \'building\')',
     'Class:Location/Attribute:locations_list' => 'Child locations',
     'Class:Location/Attribute:locations_list+' => 'List of all locations included in this one',
+    'Class:Location/Attribute:description' => 'Description',
+    'Class:Location/Attribute:description+' => '',
     'Class:Location/Attribute:type/Value:1' => 'Campus',
     'Class:Location/Attribute:type/Value:2' => 'Building',
     'Class:Location/Attribute:type/Value:3' => 'Floor',
