@@ -32,12 +32,6 @@
                         <value id="5">5</value>
                     </values>
                 </field>
-                <field id="locationtype_id" xsi:type="AttributeExternalKey" _delta="force">
-                    <sql>locationtype_id</sql>
-                    <target_class>LocationType</target_class>
-                    <is_null_allowed>true</is_null_allowed>
-                    <on_target_delete>DEL_MANUAL</on_target_delete>
-                </field>
                 <field id="parent_id" xsi:type="AttributeHierarchicalKey" _delta="define_if_not_exists">
                     <sql>parent_id</sql>
                     <filter>
