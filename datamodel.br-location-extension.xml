@@ -181,7 +181,13 @@
                                 while($oChild = $oChildSet->Fetch())
                                 {
                                     $oChild->SetNicename();
+                                    $oChild->i_NameChanged = true;
                                     $oChild->DBUpdate();
+                                    if (!(empty($oChild->Get('locations_list'))))
+                                    {
+                                        // Cascade to further childs
+                                        $oChild->UpdateChilds();
+                                    }
                                 }
                             }
 					    }]]>
