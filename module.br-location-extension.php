@@ -2,14 +2,14 @@
 
 /**
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2022-11-25
+ * @version     2023-03-03
  *
  * iTop module definition file
  */
 
 SetupWebPage::AddModule(
     __FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-    'br-location-extension/0.5.0',
+    'br-location-extension/0.5.1',
     array(
         // Identification
         //
@@ -19,7 +19,7 @@ SetupWebPage::AddModule(
         // Setup
         //
         'dependencies' => array(
-            'itop-config-mgmt/0.0.0',
+            '(itop-config-mgmt/2.5.0 & itop-config-mgmt/<3.0.0)||itop-structure/3.0.0',
         ),
         'mandatory' => false,
         'visible' => true,
