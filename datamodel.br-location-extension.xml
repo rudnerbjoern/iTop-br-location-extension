@@ -228,4 +228,40 @@
             </presentation>
         </class>
     </classes>
+    <dictionaries>
+        <dictionary id="EN US">
+            <entries>
+                <entry id="Class:Location/Attribute:type" _delta="define">Type</entry>
+                <entry id="Class:Location/Attribute:type+" _delta="define">What kind of location is it or what purpose does it have?</entry>
+                <entry id="Class:Location/Attribute:parent_id" _delta="define">Parent</entry>
+                <entry id="Class:Location/Attribute:parent_id+" _delta="define">Location hosting this one (eg. For a 'room', should be a 'floor' or a 'building')</entry>
+                <entry id="Class:Location/Attribute:locations_list" _delta="define">Child locations</entry>
+                <entry id="Class:Location/Attribute:locations_list+" _delta="define">List of all locations included in this one</entry>
+                <entry id="Class:Location/Attribute:description" _delta="define">Description</entry>
+                <entry id="Class:Location/Attribute:description+" _delta="define"></entry>
+                <entry id="Class:Location/Attribute:type/Value:1" _delta="define">Campus</entry>
+                <entry id="Class:Location/Attribute:type/Value:2" _delta="define">Building</entry>
+                <entry id="Class:Location/Attribute:type/Value:3" _delta="define">Floor</entry>
+                <entry id="Class:Location/Attribute:type/Value:4" _delta="define">Room</entry>
+                <entry id="Class:Location/Attribute:type/Value:5" _delta="define">Tile</entry>
+            </entries>
+        </dictionary>
+        <dictionary id="DE DE">
+            <entries>
+                <entry id="Class:Location/Attribute:type" _delta="define">Typ</entry>
+                <entry id="Class:Location/Attribute:type+" _delta="define">Von welcher Art von Standort ist dieser?</entry>
+                <entry id="Class:Location/Attribute:parent_id" _delta="define">Parent</entry>
+                <entry id="Class:Location/Attribute:parent_id+" _delta="define">Übergeordneter Standort, in den dieser eingegliedert ist</entry>
+                <entry id="Class:Location/Attribute:locations_list" _delta="define">Child Standorte</entry>
+                <entry id="Class:Location/Attribute:locations_list+" _delta="define">Liste aller Standorte, die diesem zugeordnet sind</entry>
+                <entry id="Class:Location/Attribute:description" _delta="define">Beschreibung</entry>
+                <entry id="Class:Location/Attribute:description+" _delta="define"></entry>
+                <entry id="Class:Location/Attribute:type/Value:1" _delta="define">Campus</entry>
+                <entry id="Class:Location/Attribute:type/Value:2" _delta="define">Gebäude</entry>
+                <entry id="Class:Location/Attribute:type/Value:3" _delta="define">Etage</entry>
+                <entry id="Class:Location/Attribute:type/Value:4" _delta="define">Raum</entry>
+                <entry id="Class:Location/Attribute:type/Value:5" _delta="define">Fläche</entry>
+            </entries>
+        </dictionary>
+    </dictionaries>
 </itop_design>
