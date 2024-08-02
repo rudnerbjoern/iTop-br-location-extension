@@ -26,24 +26,20 @@ SetupWebPage::AddModule(
 
         // Components
         //
-        'datamodel' => array(),
+        'datamodel' => array(
+            'model.br-location-extension.php',
+        ),
         'webservice' => array(),
-        'data.struct' => array(
-            // add your 'structure' definition XML files here,
-        ),
-        'data.sample' => array(
-            // add your sample data XML files here,
-        ),
+        'data.struct' => array(),
+        'data.sample' => array(),
 
         // Documentation
         //
-        'doc.manual_setup' => '', // hyperlink to manual setup documentation, if any
-        'doc.more_information' => '', // hyperlink to more information, if any
+        'doc.manual_setup' => '',
+        'doc.more_information' => '',
 
         // Default settings
         //
-        'settings' => array(
-            // Module specific settings go here, if any
-        ),
+        'settings' => array(),
     )
 );
