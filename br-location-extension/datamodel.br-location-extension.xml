@@ -2,25 +2,25 @@
 <itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.7">
     <!--
     * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
-    * @version     2022-11-25
+    * @version     2024-08-02
     -->
     <classes>
         <class id="Location" _delta="must_exist">
             <properties>
                 <naming>
                     <attributes>
-                        <attribute id="name" _delta="delete" />
+                        <attribute id="name" _delta="delete_if_exists" />
                         <attribute id="nicename" _delta="force" />
                     </attributes>
                 </naming>
             </properties>
             <fields>
-                <field id="nicename" xsi:type="AttributeString" _delta="define">
+                <field id="nicename" xsi:type="AttributeString" _delta="force">
                     <sql>nicename</sql>
                     <default_value>unknown</default_value>
                     <is_null_allowed>false</is_null_allowed>
                 </field>
-                <field id="type" xsi:type="AttributeEnum" _delta="define">
+                <field id="type" xsi:type="AttributeEnum" _delta="force">
                     <sql>type</sql>
                     <is_null_allowed>true</is_null_allowed>
                     <display_style>list</display_style>
@@ -32,7 +32,7 @@
                         <value id="5">5</value>
                     </values>
                 </field>
-                <field id="parent_id" xsi:type="AttributeHierarchicalKey" _delta="define_if_not_exists">
+                <field id="parent_id" xsi:type="AttributeHierarchicalKey" _delta="force">
                     <sql>parent_id</sql>
                     <filter>
                         <![CDATA[SELECT Location AS l WHERE (l.type < :this->type) AND l.org_id = :this->org_id]]>
@@ -44,7 +44,7 @@
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_AUTO</on_target_delete>
                 </field>
-                <field id="locations_list" xsi:type="AttributeLinkedSet" _delta="define_if_not_exists">
+                <field id="locations_list" xsi:type="AttributeLinkedSet" _delta="force">
                     <linked_class>Location</linked_class>
                     <ext_key_to_me>parent_id</ext_key_to_me>
                 </field>
@@ -194,13 +194,13 @@
                         <item id="type" _delta="force">
                             <rank>25</rank>
                         </item>
-                        <item id="parent_id" _delta="define_if_not_exists">
+                        <item id="parent_id" _delta="force">
                             <rank>35</rank>
                         </item>
-                        <item id="description" _delta="define_if_not_exists">
+                        <item id="description" _delta="define">
                             <rank>75</rank>
                         </item>
-                        <item id="locations_list" _delta="define_if_not_exists">
+                        <item id="locations_list" _delta="force">
                             <rank>100</rank>
                         </item>
                     </items>
@@ -217,10 +217,10 @@
                         <item id="type" _delta="force">
                             <rank>15</rank>
                         </item>
-                        <item id="parent_id" _delta="define_if_not_exists">
+                        <item id="parent_id" _delta="force">
                             <rank>25</rank>
                         </item>
-                        <item id="description" _delta="define_if_not_exists">
+                        <item id="description" _delta="force">
                             <rank>75</rank>
                         </item>
                     </items>
@@ -228,40 +228,4 @@
             </presentation>
         </class>
     </classes>
-    <dictionaries>
-        <dictionary id="EN US">
-            <entries>
-                <entry id="Class:Location/Attribute:type" _delta="define_if_not_exists">Type</entry>
-                <entry id="Class:Location/Attribute:type+" _delta="define_if_not_exists">What kind of location is it or what purpose does it have?</entry>
-                <entry id="Class:Location/Attribute:parent_id" _delta="define_if_not_exists">Parent</entry>
-                <entry id="Class:Location/Attribute:parent_id+" _delta="define_if_not_exists">Location hosting this one (eg. For a 'room', should be a 'floor' or a 'building')</entry>
-                <entry id="Class:Location/Attribute:locations_list" _delta="define_if_not_exists">Child locations</entry>
-                <entry id="Class:Location/Attribute:locations_list+" _delta="define_if_not_exists">List of all locations included in this one</entry>
-                <entry id="Class:Location/Attribute:description" _delta="define_if_not_exists">Description</entry>
-                <entry id="Class:Location/Attribute:description+" _delta="define_if_not_exists"></entry>
-                <entry id="Class:Location/Attribute:type/Value:1" _delta="define_if_not_exists">Campus</entry>
-                <entry id="Class:Location/Attribute:type/Value:2" _delta="define_if_not_exists">Building</entry>
-                <entry id="Class:Location/Attribute:type/Value:3" _delta="define_if_not_exists">Floor</entry>
-                <entry id="Class:Location/Attribute:type/Value:4" _delta="define_if_not_exists">Room</entry>
-                <entry id="Class:Location/Attribute:type/Value:5" _delta="define_if_not_exists">Tile</entry>
-            </entries>
-        </dictionary>
-        <dictionary id="DE DE">
-            <entries>
-                <entry id="Class:Location/Attribute:type" _delta="define_if_not_exists">Typ</entry>
-                <entry id="Class:Location/Attribute:type+" _delta="define_if_not_exists">Von welcher Art von Standort ist dieser?</entry>
-                <entry id="Class:Location/Attribute:parent_id" _delta="define_if_not_exists">Parent</entry>
-                <entry id="Class:Location/Attribute:parent_id+" _delta="define_if_not_exists">Übergeordneter Standort, in den dieser eingegliedert ist</entry>
-                <entry id="Class:Location/Attribute:locations_list" _delta="define_if_not_exists">Child Standorte</entry>
-                <entry id="Class:Location/Attribute:locations_list+" _delta="define_if_not_exists">Liste aller Standorte, die diesem zugeordnet sind</entry>
-                <entry id="Class:Location/Attribute:description" _delta="define_if_not_exists">Beschreibung</entry>
-                <entry id="Class:Location/Attribute:description+" _delta="define_if_not_exists"></entry>
-                <entry id="Class:Location/Attribute:type/Value:1" _delta="define_if_not_exists">Campus</entry>
-                <entry id="Class:Location/Attribute:type/Value:2" _delta="define_if_not_exists">Gebäude</entry>
-                <entry id="Class:Location/Attribute:type/Value:3" _delta="define_if_not_exists">Etage</entry>
-                <entry id="Class:Location/Attribute:type/Value:4" _delta="define_if_not_exists">Raum</entry>
-                <entry id="Class:Location/Attribute:type/Value:5" _delta="define_if_not_exists">Fläche</entry>
-            </entries>
-        </dictionary>
-    </dictionaries>
 </itop_design>
