@@ -9,18 +9,18 @@
             <properties>
                 <naming>
                     <attributes>
-                        <attribute id="name" _delta="delete" />
+                        <attribute id="name" _delta="delete_if_exists" />
                         <attribute id="nicename" _delta="force" />
                     </attributes>
                 </naming>
             </properties>
             <fields>
-                <field id="nicename" xsi:type="AttributeString" _delta="define">
+                <field id="nicename" xsi:type="AttributeString" _delta="force">
                     <sql>nicename</sql>
                     <default_value>unknown</default_value>
                     <is_null_allowed>false</is_null_allowed>
                 </field>
-                <field id="type" xsi:type="AttributeEnum" _delta="define">
+                <field id="type" xsi:type="AttributeEnum" _delta="force">
                     <sql>type</sql>
                     <is_null_allowed>true</is_null_allowed>
                     <display_style>list</display_style>
@@ -32,7 +32,7 @@
                         <value id="5">5</value>
                     </values>
                 </field>
-                <field id="parent_id" xsi:type="AttributeHierarchicalKey" _delta="define_if_not_exists">
+                <field id="parent_id" xsi:type="AttributeHierarchicalKey" _delta="force">
                     <sql>parent_id</sql>
                     <filter>
                         <![CDATA[SELECT Location AS l WHERE (l.type < :this->type) AND l.org_id = :this->org_id]]>
@@ -44,7 +44,7 @@
                     <is_null_allowed>true</is_null_allowed>
                     <on_target_delete>DEL_AUTO</on_target_delete>
                 </field>
-                <field id="locations_list" xsi:type="AttributeLinkedSet" _delta="define_if_not_exists">
+                <field id="locations_list" xsi:type="AttributeLinkedSet" _delta="force">
                     <linked_class>Location</linked_class>
                     <ext_key_to_me>parent_id</ext_key_to_me>
                 </field>
@@ -194,13 +194,13 @@
                         <item id="type" _delta="force">
                             <rank>25</rank>
                         </item>
-                        <item id="parent_id" _delta="define_if_not_exists">
+                        <item id="parent_id" _delta="force">
                             <rank>35</rank>
                         </item>
-                        <item id="description" _delta="define_if_not_exists">
+                        <item id="description" _delta="define">
                             <rank>75</rank>
                         </item>
-                        <item id="locations_list" _delta="define_if_not_exists">
+                        <item id="locations_list" _delta="force">
                             <rank>100</rank>
                         </item>
                     </items>
@@ -217,10 +217,10 @@
                         <item id="type" _delta="force">
                             <rank>15</rank>
                         </item>
-                        <item id="parent_id" _delta="define_if_not_exists">
+                        <item id="parent_id" _delta="force">
                             <rank>25</rank>
                         </item>
-                        <item id="description" _delta="define_if_not_exists">
+                        <item id="description" _delta="force">
                             <rank>75</rank>
                         </item>
                     </items>
