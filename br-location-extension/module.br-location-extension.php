@@ -2,14 +2,14 @@
 
 /**
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2024-08-02
+ * @version     2024-08-28
  *
  * iTop module definition file
  */
 
 SetupWebPage::AddModule(
     __FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-    'br-location-extension/0.6.0',
+    'br-location-extension/0.6.1',
     array(
         // Identification
         //
@@ -26,9 +26,7 @@ SetupWebPage::AddModule(
 
         // Components
         //
-        'datamodel' => array(
-            'model.br-location-extension.php',
-        ),
+        'datamodel' => array(),
         'webservice' => array(),
         'data.struct' => array(),
         'data.sample' => array(),
