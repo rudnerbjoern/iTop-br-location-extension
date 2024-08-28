@@ -10,7 +10,7 @@
 
 SetupWebPage::AddModule(
     __FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-    'br-location-extension-bridge-for-datacenterview/0.6.1',
+    'br-location-extension-bridge-for-datacenterview/0.7.0',
     array(
         // Identification
         'label' => 'Bridge - Location Extension - Molkobain Datacenter View',
@@ -18,8 +18,8 @@ SetupWebPage::AddModule(
 
         // Setup
         'dependencies' => array(
-            'br-location-extension/0.6.1||molkobain-datacenter-view/1.6.0',
-            'br-location-extension/0.6.1',
+            'br-location-extension/0.7.0||molkobain-datacenter-view/1.6.0',
+            'br-location-extension/0.7.0',
         ),
         'mandatory' => false,
         'visible' => true,
