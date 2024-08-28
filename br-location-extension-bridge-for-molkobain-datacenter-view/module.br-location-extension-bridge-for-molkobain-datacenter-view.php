@@ -18,7 +18,7 @@ SetupWebPage::AddModule(
 
         // Setup
         'dependencies' => array(
-            'molkobain-datacenter-view/1.6.0',
+            'br-location-extension/0.6.1||molkobain-datacenter-view/1.6.0',
             'br-location-extension/0.6.1',
         ),
         'mandatory' => false,
