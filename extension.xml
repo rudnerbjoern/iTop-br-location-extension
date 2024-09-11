@@ -16,16 +16,16 @@
         <![CDATA[Adds additional fields to the iTop Location class.]]>
     </description>
     <version>
-        <![CDATA[0.7.1]]>
+        <![CDATA[3.1.8]]>
     </version>
     <release_date>
-        <![CDATA[2024-09-02]]>
+        <![CDATA[2024-09-11]]>
     </release_date>
     <version_description>
         <![CDATA[]]>
     </version_description>
     <itop_version_min>
-        <![CDATA[2.7.0]]>
+        <![CDATA[3.1.0]]>
     </itop_version_min>
     <status>stable</status>
     <mandatory>false</mandatory>
