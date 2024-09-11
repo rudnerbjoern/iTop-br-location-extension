@@ -9,7 +9,7 @@
 
 SetupWebPage::AddModule(
     __FILE__, // Path to the current file, all other file names are relative to the directory containing this file
-    'br-location-extension/0.7.1',
+    'br-location-extension/3.1.8',
     array(
         // Identification
         //
