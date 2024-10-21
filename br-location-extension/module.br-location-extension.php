@@ -23,6 +23,7 @@ SetupWebPage::AddModule(
         ),
         'mandatory' => false,
         'visible' => true,
+        'installer' => 'LocationExtensionInstaller',
 
         // Components
         //
@@ -41,3 +42,41 @@ SetupWebPage::AddModule(
         'settings' => array(),
     )
 );
+
+
+if (!class_exists('LocationExtensionInstaller')) {
+    /**
+     * Class LocationExtensionInstaller
+     *
+     * @since v3.1.4
+     */
+    class LocationExtensionInstaller extends ModuleInstallerAPI
+    {
+
+        public static function BeforeWritingConfig(Config $oConfiguration)
+        {
+            // If you want to override/force some configuration values, do it here
+            return $oConfiguration;
+        }
+        public static function AfterDatabaseCreation(Config $oConfiguration, $sPreviousVersion, $sCurrentVersion)
+        {
+            if (version_compare($sPreviousVersion, '3.1.9', '<')) {
+
+                SetupLog::Info("|- Upgrading br-location-extension from '$sPreviousVersion' to '$sCurrentVersion'.");
+
+                $oSearch = DBSearch::FromOQL('SELECT Location WHERE parent_id = 0');
+                $oSet = new DBObjectSet($oSearch, array(), array());
+                if ($oSet->Count() > 0) {
+                    while ($oLocation = $oSet->Fetch()) {
+                        $sLocationName = $oLocation->Get('name');
+                        $oLocation->i_NameChanged = true;
+                        $oLocation->SetNicename();
+                        $oLocation->DBUpdate();
+                        $sLocationNicename = $oLocation->Get('nicename');
+                        SetupLog::Info("|  |- Location '$sLocationName' Nicename changed to '$sLocationNicename'.");
+                    }
+                }
+            }
+        }
+    }
+}
