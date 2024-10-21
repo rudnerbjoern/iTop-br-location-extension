@@ -2,7 +2,7 @@
 <itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1">
     <!--
     * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
-    * @version     2024-09-11
+    * @version     2024-10-21
     -->
     <classes>
         <class id="Location" _delta="must_exist">
