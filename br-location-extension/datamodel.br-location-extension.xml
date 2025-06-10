@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.1">
+<?xml-model href="https://raw.githubusercontent.com/rudnerbjoern/iTop-schema/refs/heads/main/datamodel.v3.2.xsd"?>
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.2">
     <!--
     * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
     * @version     2024-10-21
@@ -133,7 +134,7 @@
                             // The Location is updated in DB and Name was changed,
                             if (isset($this->i_NameChanged))
                             {
-                                // we need to rename the childs
+                                // we need to rename the children
                                 $this->UpdateChilds();
                             }
                             parent::AfterUpdate();
@@ -189,7 +190,7 @@
                                     $oChild->DBUpdate();
                                     if (!(empty($oChild->Get('locations_list'))))
                                     {
-                                        // Cascade to further childs
+                                        // Cascade to further children
                                         $oChild->UpdateChilds();
                                     }
                                 }
