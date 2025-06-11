@@ -8,6 +8,7 @@
  * Localized data
  */
 
+ /** @disregard P1009 Undefined type Dict */
 Dict::Add('DE DE', 'German', 'Deutsch', array(
     'Class:Location/Attribute:type' => 'Typ',
     'Class:Location/Attribute:type+' => 'Welche Art von Standort ist dieser?',
