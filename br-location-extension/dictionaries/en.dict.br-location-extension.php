@@ -1,13 +1,14 @@
 <?php
 
 /**
- * @copyright   Copyright (C) 2024 Björn Rudner
+ * @copyright   Copyright (C) 2024-2025 Björn Rudner
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2024-10-21
+ * @version     2025-06-12
  *
  * Localized data
  */
 
+/** @disregard P1009 Undefined type Dict */
 Dict::Add('EN US', 'English', 'English', array(
     'Class:Location/Attribute:type' => 'Type',
     'Class:Location/Attribute:type+' => 'What kind of location is it or what purpose does it have?',
