@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-model href="https://raw.githubusercontent.com/rudnerbjoern/iTop-schema/refs/heads/main/3.2/itop_design.xsd"?>
-<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.2">
+<itop_design version="3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/rudnerbjoern/iTop-schema/refs/heads/main/3.2/itop_design.xsd">
     <!--
-    * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
-    * @version     2024-10-21
+ * @copyright   Copyright (C) 2024-2025 Björn Rudner
+ * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
+ * @version     2025-06-12
     -->
     <classes>
         <class id="Location" _delta="must_exist">
