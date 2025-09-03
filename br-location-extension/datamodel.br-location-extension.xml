@@ -66,56 +66,56 @@
                 </field>
             </fields>
             <event_listeners>
-                <event_listener id="EvtSetInitialAttributeFlags">
+                <event_listener id="EvtSetInitialNicenameAttributeFlags">
                     <event>EVENT_DB_SET_INITIAL_ATTRIBUTES_FLAGS</event>
                     <rank>10</rank>
-                    <callback>EvtSetInitialAttributeFlags</callback>
+                    <callback>EvtSetInitialNicenameAttributeFlags</callback>
                 </event_listener>
-                <event_listener id="EvtSetAttributeFlags">
+                <event_listener id="EvtSetNicenameAttributeFlags">
                     <event>EVENT_DB_SET_ATTRIBUTES_FLAGS</event>
                     <rank>10</rank>
-                    <callback>EvtSetAttributeFlags</callback>
+                    <callback>EvtSetNicenameAttributeFlags</callback>
                 </event_listener>
-                <event_listener id="EvtBeforeWrite">
+                <event_listener id="EvtBeforeNicenameWrite">
                     <event>EVENT_DB_BEFORE_WRITE</event>
                     <rank>10</rank>
-                    <callback>EvtBeforeWrite</callback>
+                    <callback>EvtBeforeNicenameWrite</callback>
                 </event_listener>
-                <event_listener id="EvtAfterWrite">
+                <event_listener id="EvtAfterNicenameWrite">
                     <event>EVENT_DB_AFTER_WRITE</event>
                     <rank>10</rank>
-                    <callback>EvtAfterWrite</callback>
+                    <callback>EvtAfterNicenameWrite</callback>
                 </event_listener>
             </event_listeners>
             <methods>
-                <method id="EvtSetInitialAttributeFlags">
+                <method id="EvtSetInitialNicenameAttributeFlags">
                     <static>false</static>
                     <access>public</access>
                     <type>EventListener</type>
                     <code><![CDATA[
-    public function EvtSetInitialAttributeFlags(Combodo\iTop\Service\Events\EventData $oEventData)
+    public function EvtSetInitialNicenameAttributeFlags(Combodo\iTop\Service\Events\EventData $oEventData)
     {
         $this->ForceInitialAttributeFlags('nicename', OPT_ATT_HIDDEN);
     }
   ]]></code>
                 </method>
-                <method id="EvtSetAttributeFlags">
+                <method id="EvtSetNicenameAttributeFlags">
                     <static>false</static>
                     <access>public</access>
                     <type>EventListener</type>
                     <code><![CDATA[
-    public function EvtSetAttributeFlags(Combodo\iTop\Service\Events\EventData $oEventData)
+    public function EvtSetNicenameAttributeFlags(Combodo\iTop\Service\Events\EventData $oEventData)
     {
         $this->ForceAttributeFlags('nicename', OPT_ATT_READONLY);
     }
   ]]></code>
                 </method>
-                <method id="EvtBeforeWrite">
+                <method id="EvtBeforeNicenameWrite">
                     <static>false</static>
                     <access>public</access>
                     <type>EventListener</type>
                     <code><![CDATA[
-    public function EvtBeforeWrite(Combodo\iTop\Service\Events\EventData $oEventData)
+    public function EvtBeforeNicenameWrite(Combodo\iTop\Service\Events\EventData $oEventData)
     {
         if ($oEventData->Get('is_new')) {
             $this->SetNicename();
@@ -132,12 +132,12 @@
     }
   ]]></code>
                 </method>
-                <method id="EvtAfterWrite">
+                <method id="EvtAfterNicenameWrite">
                     <static>false</static>
                     <access>public</access>
                     <type>EventListener</type>
                     <code><![CDATA[
-    public function EvtAfterWrite(Combodo\iTop\Service\Events\EventData $oEventData)
+    public function EvtAfterNicenameWrite(Combodo\iTop\Service\Events\EventData $oEventData)
     {
         // The Location is updated in DB and Name was changed,
         if (isset($this->i_NameChanged))
