@@ -65,138 +65,145 @@
                     <is_null_allowed>true</is_null_allowed>
                 </field>
             </fields>
+            <event_listeners>
+                <event_listener id="EvtSetInitialAttributeFlags">
+                    <event>EVENT_DB_SET_INITIAL_ATTRIBUTES_FLAGS</event>
+                    <rank>10</rank>
+                    <callback>EvtSetInitialAttributeFlags</callback>
+                </event_listener>
+                <event_listener id="EvtSetAttributeFlags">
+                    <event>EVENT_DB_SET_ATTRIBUTES_FLAGS</event>
+                    <rank>10</rank>
+                    <callback>EvtSetAttributeFlags</callback>
+                </event_listener>
+                <event_listener id="EvtBeforeWrite">
+                    <event>EVENT_DB_BEFORE_WRITE</event>
+                    <rank>10</rank>
+                    <callback>EvtBeforeWrite</callback>
+                </event_listener>
+                <event_listener id="EvtAfterWrite">
+                    <event>EVENT_DB_AFTER_WRITE</event>
+                    <rank>10</rank>
+                    <callback>EvtAfterWrite</callback>
+                </event_listener>
+            </event_listeners>
             <methods>
-                <method id="GetAttributeFlags" _delta="define">
+                <method id="EvtSetInitialAttributeFlags">
                     <static>false</static>
                     <access>public</access>
-                    <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[public function GetAttributeFlags($sAttCode, &$aReasons = array(), $sTargetState = '')
-					    {
-						    // Force the computed field to be read-only, preventing it to be written
-						    if (($sAttCode == 'nicename'))
-							    return(OPT_ATT_READONLY | parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState));
-						    return parent::GetAttributeFlags($sAttCode, $aReasons, $sTargetState);
-					    }]]>
-                    </code>
+                    <type>EventListener</type>
+                    <code><![CDATA[
+    public function EvtSetInitialAttributeFlags(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        $this->ForceInitialAttributeFlags('nicename', OPT_ATT_HIDDEN);
+    }
+  ]]></code>
                 </method>
-                <method id="GetInitialStateAttributeFlags" _delta="define">
+                <method id="EvtSetAttributeFlags">
                     <static>false</static>
                     <access>public</access>
-                    <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[public function GetInitialStateAttributeFlags($sAttCode, &$aReasons = array())
-					    {
-						    // Hide the calculated field in object creation form
-						    if (($sAttCode == 'nicename'))
-							    return(OPT_ATT_HIDDEN | parent::GetInitialStateAttributeFlags($sAttCode, $aReasons));
-						    return parent::GetInitialStateAttributeFlags($sAttCode, $aReasons);
-					    }]]>
-                    </code>
+                    <type>EventListener</type>
+                    <code><![CDATA[
+    public function EvtSetAttributeFlags(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        $this->ForceAttributeFlags('nicename', OPT_ATT_READONLY);
+    }
+  ]]></code>
                 </method>
-                <method id="OnInsert" _delta="define">
+                <method id="EvtBeforeWrite">
                     <static>false</static>
                     <access>public</access>
-                    <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[public function OnInsert()
-					    {
-						    $this->SetNicename();
-                            parent::OnInsert();
-					    }]]>
-                    </code>
+                    <type>EventListener</type>
+                    <code><![CDATA[
+    public function EvtBeforeWrite(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        if ($oEventData->Get('is_new')) {
+            $this->SetNicename();
+        }
+        else {
+            $aChanges = $this->ListChanges();
+            if (array_key_exists('name', $aChanges) || array_key_exists('parent_id', $aChanges))
+            {
+                // record in the Location memory object that the name was changed
+                $this->i_NameChanged = true;
+                $this->SetNicename();
+            }
+        }
+    }
+  ]]></code>
                 </method>
-                <method id="OnUpdate" _delta="define">
+                <method id="EvtAfterWrite">
                     <static>false</static>
                     <access>public</access>
-                    <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[public function OnUpdate()
-					    {
-                            $aChanges = $this->ListChanges();
-                            if (array_key_exists('name', $aChanges) || array_key_exists('parent_id', $aChanges))
-                            {
-                                // record in the Location memory object that the name was changed
-                                $this->i_NameChanged = true;
-                                $this->SetNicename();
-                            }
-                            parent::OnUpdate();
-					    }]]>
-                    </code>
-                </method>
-                <method id="AfterUpdate" _delta="define">
-                    <static>false</static>
-                    <access>public</access>
-                    <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[public function AfterUpdate()
-					    {
-                            // The Location is updated in DB and Name was changed,
-                            if (isset($this->i_NameChanged))
-                            {
-                                // we need to rename the children
-                                $this->UpdateChilds();
-                            }
-                            parent::AfterUpdate();
-					    }]]>
-                    </code>
+                    <type>EventListener</type>
+                    <code><![CDATA[
+    public function EvtAfterWrite(Combodo\iTop\Service\Events\EventData $oEventData)
+    {
+        // The Location is updated in DB and Name was changed,
+        if (isset($this->i_NameChanged))
+        {
+            // we need to rename the children
+            $this->UpdateChilds();
+        }
+    }
+  ]]></code>
                 </method>
                 <method id="SetNicename" _delta="define">
                     <static>false</static>
                     <access>public</access>
                     <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[public function SetNicename()
-					    {
-                            // read the new value of the Name
-                            $sName = $this->Get('name');
+                    <code><![CDATA[
+    public function SetNicename()
+    {
+        // read the new value of the Name
+        $sName = $this->Get('name');
 
-                            // failsafe, the field cannot be empty
-                            $sNicename = $sName;
+        // failsafe, the field cannot be empty
+        $sNicename = $sName;
 
-                            // get Nicename from Parent
-                            $sParentNicename = '';
+        // get Nicename from Parent
+        $sParentNicename = '';
 
-                            if (!(empty($this->Get('parent_id'))))
-							{
-								// try to get the parent Location
-								$oParentLocation = MetaModel::GetObject('Location', $this->Get('parent_id'));
-								if (is_object($oParentLocation))
-								{
-                                    $sParentNicename = $oParentLocation->Get('nicename');
-                                    $sNicename = $sParentNicename.'/'.$sName;
-								}
-							}
+        if (!(empty($this->Get('parent_id'))))
+        {
+            // try to get the parent Location
+            $oParentLocation = MetaModel::GetObject('Location', $this->Get('parent_id'));
+            if (is_object($oParentLocation))
+            {
+                $sParentNicename = $oParentLocation->Get('nicename');
+                $sNicename = $sParentNicename.'/'.$sName;
+            }
+        }
 
-                            $this->Set('nicename', $sNicename);
-					    }]]>
-                    </code>
+        $this->Set('nicename', $sNicename);
+    }
+  ]]></code>
                 </method>
                 <method id="UpdateChilds" _delta="define">
                     <static>false</static>
                     <access>public</access>
                     <type>Overload-DBObject</type>
-                    <code>
-                        <![CDATA[public function UpdateChilds()
-					    {
-                            if (!(empty($this->Get('locations_list'))))
-							{
-                                // Cascade to Child Locations
-                                $oChildSet = $this->Get('locations_list');
-                                while($oChild = $oChildSet->Fetch())
-                                {
-                                    $oChild->SetNicename();
-                                    $oChild->i_NameChanged = true;
-                                    $oChild->DBUpdate();
-                                    if (!(empty($oChild->Get('locations_list'))))
-                                    {
-                                        // Cascade to further children
-                                        $oChild->UpdateChilds();
-                                    }
-                                }
-                            }
-					    }]]>
-                    </code>
+                    <code><![CDATA[
+    public function UpdateChilds()
+    {
+        if (!(empty($this->Get('locations_list'))))
+        {
+            // Cascade to Child Locations
+            $oChildSet = $this->Get('locations_list');
+            while($oChild = $oChildSet->Fetch())
+            {
+                $oChild->SetNicename();
+                $oChild->i_NameChanged = true;
+                $oChild->DBUpdate();
+                if (!(empty($oChild->Get('locations_list'))))
+                {
+                    // Cascade to further children
+                    $oChild->UpdateChilds();
+                }
+            }
+        }
+    }
+  ]]></code>
                 </method>
             </methods>
             <presentation>

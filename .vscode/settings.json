@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
         "Childs",
+        "Combodo",
         "dashlet",
         "dashlets",
         "datacenter",
@@ -11,5 +12,8 @@
         "molkobain",
         "Molkobain",
         "nicename"
-    ]
+    ],
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "editor.formatOnPaste": true
 }
