@@ -3,7 +3,6 @@
     <!--
  * @copyright   Copyright (C) 2024-2025 Björn Rudner
  * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
- * @version     2025-06-12
     -->
     <classes>
         <class id="Location" _delta="must_exist">
@@ -143,7 +142,7 @@
         if (isset($this->i_NameChanged))
         {
             // we need to rename the children
-            $this->UpdateChilds();
+            $this->UpdateChildren();
         }
     }
   ]]></code>
@@ -179,12 +178,12 @@
     }
   ]]></code>
                 </method>
-                <method id="UpdateChilds" _delta="define">
+                <method id="UpdateChildren" _delta="define">
                     <static>false</static>
                     <access>public</access>
                     <type>Overload-DBObject</type>
                     <code><![CDATA[
-    public function UpdateChilds()
+    public function UpdateChildren()
     {
         if (!(empty($this->Get('locations_list'))))
         {
@@ -198,7 +197,7 @@
                 if (!(empty($oChild->Get('locations_list'))))
                 {
                     // Cascade to further children
-                    $oChild->UpdateChilds();
+                    $oChild->UpdateChildren();
                 }
             }
         }
