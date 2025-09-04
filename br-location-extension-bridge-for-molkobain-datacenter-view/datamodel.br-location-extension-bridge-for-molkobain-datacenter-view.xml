@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<itop_design version="3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/rudnerbjoern/iTop-schema/refs/heads/main/3.2/itop_design.xsd">
+<itop_design version="3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://rudnerbjoern.github.io/iTop-schema/3.2/itop_design.xsd">
     <!--
     * @copyright   Copyright (C) 2024 Björn Rudner
     * @license     https://www.gnu.org/licenses/gpl-3.0.en.html
@@ -29,10 +29,10 @@
         </class>
     </classes>
     <menus>
-        <menu id="Typology">
+        <menu id="Typology" xsi:type="DashboardMenuNode" _delta="if_exists">
             <definition>
                 <cells>
-                    <cell id="0">
+                    <cell id="0" _delta="if_exists">
                         <dashlets>
                             <dashlet id="LocationType" xsi:type="DashletBadge" _delta="delete_if_exists" />
                         </dashlets>
