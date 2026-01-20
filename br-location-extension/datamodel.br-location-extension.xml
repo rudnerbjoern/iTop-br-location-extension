@@ -65,56 +65,56 @@
                 </field>
             </fields>
             <event_listeners>
-                <event_listener id="EvtSetInitialNicenameAttributeFlags">
+                <event_listener id="OnLocationSetInitialAttributesFlagsNicename">
                     <event>EVENT_DB_SET_INITIAL_ATTRIBUTES_FLAGS</event>
                     <rank>10</rank>
-                    <callback>EvtSetInitialNicenameAttributeFlags</callback>
+                    <callback>OnLocationSetInitialAttributesFlagsNicename</callback>
                 </event_listener>
-                <event_listener id="EvtSetNicenameAttributeFlags">
+                <event_listener id="OnLocationSetAttributesFlagsNicename">
                     <event>EVENT_DB_SET_ATTRIBUTES_FLAGS</event>
                     <rank>10</rank>
-                    <callback>EvtSetNicenameAttributeFlags</callback>
+                    <callback>OnLocationSetAttributesFlagsNicename</callback>
                 </event_listener>
-                <event_listener id="EvtBeforeNicenameWrite">
+                <event_listener id="OnLocationBeforeWriteNicename">
                     <event>EVENT_DB_BEFORE_WRITE</event>
                     <rank>10</rank>
-                    <callback>EvtBeforeNicenameWrite</callback>
+                    <callback>OnLocationBeforeWriteNicename</callback>
                 </event_listener>
-                <event_listener id="EvtAfterNicenameWrite">
+                <event_listener id="OnLocationAfterWriteNicename">
                     <event>EVENT_DB_AFTER_WRITE</event>
                     <rank>10</rank>
-                    <callback>EvtAfterNicenameWrite</callback>
+                    <callback>OnLocationAfterWriteNicename</callback>
                 </event_listener>
             </event_listeners>
             <methods>
-                <method id="EvtSetInitialNicenameAttributeFlags">
+                <method id="OnLocationSetInitialAttributesFlagsNicename">
                     <static>false</static>
                     <access>public</access>
                     <type>EventListener</type>
                     <code><![CDATA[
-    public function EvtSetInitialNicenameAttributeFlags(Combodo\iTop\Service\Events\EventData $oEventData)
+    public function OnLocationSetInitialAttributesFlagsNicename(Combodo\iTop\Service\Events\EventData $oEventData)
     {
         $this->ForceInitialAttributeFlags('nicename', OPT_ATT_HIDDEN);
     }
   ]]></code>
                 </method>
-                <method id="EvtSetNicenameAttributeFlags">
+                <method id="OnLocationSetAttributesFlagsNicename">
                     <static>false</static>
                     <access>public</access>
                     <type>EventListener</type>
                     <code><![CDATA[
-    public function EvtSetNicenameAttributeFlags(Combodo\iTop\Service\Events\EventData $oEventData)
+    public function OnLocationSetAttributesFlagsNicename(Combodo\iTop\Service\Events\EventData $oEventData)
     {
         $this->ForceAttributeFlags('nicename', OPT_ATT_READONLY);
     }
   ]]></code>
                 </method>
-                <method id="EvtBeforeNicenameWrite">
+                <method id="OnLocationBeforeWriteNicename">
                     <static>false</static>
                     <access>public</access>
                     <type>EventListener</type>
                     <code><![CDATA[
-    public function EvtBeforeNicenameWrite(Combodo\iTop\Service\Events\EventData $oEventData)
+    public function OnLocationBeforeWriteNicename(Combodo\iTop\Service\Events\EventData $oEventData)
     {
         if ($oEventData->Get('is_new')) {
             $this->SetNicename();
@@ -131,12 +131,12 @@
     }
   ]]></code>
                 </method>
-                <method id="EvtAfterNicenameWrite">
+                <method id="OnLocationAfterWriteNicename">
                     <static>false</static>
                     <access>public</access>
                     <type>EventListener</type>
                     <code><![CDATA[
-    public function EvtAfterNicenameWrite(Combodo\iTop\Service\Events\EventData $oEventData)
+    public function OnLocationAfterWriteNicename(Combodo\iTop\Service\Events\EventData $oEventData)
     {
         // The Location is updated in DB and Name was changed,
         if (isset($this->i_NameChanged))
