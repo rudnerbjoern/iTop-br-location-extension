@@ -94,7 +94,7 @@
                     <code><![CDATA[
     public function OnLocationSetInitialAttributesFlagsNicename(Combodo\iTop\Service\Events\EventData $oEventData)
     {
-        $this->ForceInitialAttributeFlags('nicename', OPT_ATT_HIDDEN);
+        $this->AddInitialAttributeFlags('nicename', OPT_ATT_HIDDEN);
     }
   ]]></code>
                 </method>
@@ -105,7 +105,7 @@
                     <code><![CDATA[
     public function OnLocationSetAttributesFlagsNicename(Combodo\iTop\Service\Events\EventData $oEventData)
     {
-        $this->ForceAttributeFlags('nicename', OPT_ATT_READONLY);
+        $this->AddAttributeFlags('nicename', OPT_ATT_READONLY);
     }
   ]]></code>
                 </method>
