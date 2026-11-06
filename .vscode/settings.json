@@ -5,12 +5,16 @@
         "dashlets",
         "datacenter",
         "datacenterview",
+        "fieldset",
         "isset",
+        "itop",
         "locationtype",
         "mgmt",
-        "molkobain",
         "Molkobain",
-        "nicename"
+        "molkobain",
+        "moreinfo",
+        "nicename",
+        "Rudner"
     ],
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "modificationsIfAvailable",
