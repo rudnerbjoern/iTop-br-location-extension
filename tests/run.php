@@ -5,6 +5,7 @@ declare(strict_types=1);
 try {
     $tests = require __DIR__ . '/schemas.php';
     $tests = array_merge($tests, require __DIR__ . '/prepare-release.php');
+    $tests = array_merge($tests, require __DIR__ . '/modules.php');
     if (!is_array($tests) || $tests === []) {
         throw new RuntimeException('No tests found.');
     }
