@@ -23,7 +23,8 @@ across filesystem failures. Formatting outside the metadata elements and version
 strings is preserved.
 
 Set up the local schemas as described in [the test instructions](../tests/README.md)
-before running the script. After updating metadata, it runs `tests/run.php`.
+before running the script. After updating metadata, it runs `tests/run.php`,
+including all module, schema, and release-preparation tests.
 If tests fail, the script exits unsuccessfully and retains the edits for review.
 Resolve failures before publishing.
 The script does not stage, commit, push, tag, or publish anything.
@@ -31,8 +32,8 @@ The script does not stage, commit, push, tag, or publish anything.
 Use a release branch named `release/<version>`, for example `release/3.2.2`.
 Review the diff, commit on that branch, and open a PR into `main`. PR CI requires
 the branch version to match the manifest, both modules, and the bridge dependencies.
-CI runs PHP syntax checks, release-preparation tests, and XSD validation for
-the manifest and both data models, alongside secret scanning. These checks do not establish runtime
+CI runs PHP syntax checks, module and release-preparation tests, and XSD validation
+for the manifest and both data models, alongside secret scanning. These checks do not establish runtime
 behavior or successful installation in iTop.
 
 Merging a `release/X.Y.Z` PR from this same repository automatically starts the

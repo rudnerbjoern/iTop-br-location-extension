@@ -157,15 +157,4 @@ foreach (['name', 'parent_id'] as $change) {
     };
 }
 
-$failures = 0;
-foreach ($tests as $name => $test) {
-    try {
-        $test();
-        echo "PASS: $name\n";
-    } catch (Throwable $error) {
-        $failures++;
-        fwrite(STDERR, "FAIL: $name: {$error->getMessage()}\n");
-    }
-}
-echo count($tests) . " tests, $failures failures\n";
-exit($failures === 0 ? 0 : 1);
+return $tests;

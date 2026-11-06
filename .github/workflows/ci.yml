@@ -100,9 +100,6 @@ jobs:
       - name: Run PHP tests and schema validation
         run: php tests/run.php
 
-      - name: Run Location and bridge module tests
-        run: php tests/modules.php
-
   release_metadata:
     name: Validate release branch
     needs: select_checks

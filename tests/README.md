@@ -1,8 +1,7 @@
 # PHP tests
 
 Run from the repository root with PHP 8.0 or later, SimpleXML, and DOM enabled.
-The module suite needs no schema downloads. For schema validation, first download
-the two standalone schemas used by the project's XML files:
+First download the two standalone schemas used by the project's XML files:
 
 ```sh
 mkdir -p .tmp/schemas/3.2
@@ -23,7 +22,6 @@ Alternatively, set `ITOP_SCHEMA_DIR` to an existing iTop-schema checkout contain
 
 ```sh
 php tests/run.php
-php tests/modules.php
 ```
 
 On Windows, use the same command with `php.exe` if needed.
@@ -34,8 +32,9 @@ The runner prints each result and exits with `0` on success or `1` on failure.
 
 On pushes and pull requests targeting `main`, the central `CI` workflow sets up
 PHP 8.3 with DOM and SimpleXML, downloads both schemas into `.tmp/schemas`, checks
-PHP syntax, and runs both commands above. Both suites must succeed for the
-`PR checks` job to pass; a schema download failure fails the job.
+PHP syntax, and runs `php tests/run.php`. All module, schema, and release-preparation
+tests must succeed for the `PR checks` job to pass; a schema download failure fails
+the job.
 For `release/*` PRs, CI also validates the `release/X.Y.Z` branch name against
 the manifest, both module versions, and bridge dependencies.
 
@@ -53,11 +52,8 @@ versions present locally.
 
 ## Module tests
 
-Run the module suite independently without downloading schemas:
-
-```sh
-php tests/modules.php
-```
+`tests/modules.php` returns its test cases to the shared runner;
+`php tests/run.php` executes all suites and reports their combined result.
 
 The tests extract and execute the six real PHP methods from the Location XML.
 Small substitutes provide attribute access, parent lookup, child collections,
